@@ -27,6 +27,7 @@
 mod p;
 mod zb;
 mod zk;
+mod xint;
 
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
 pub use p::*;
@@ -34,6 +35,8 @@ pub use p::*;
 pub use zb::*;
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
 pub use zk::*;
+#[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
+pub use xint::*;
 
 use crate::arch::asm;
 
