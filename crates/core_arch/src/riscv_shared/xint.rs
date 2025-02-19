@@ -1,6 +1,11 @@
 #[cfg(test)]
 use stdarch_test::assert_instr;
 
+// FIXME: Using #[target_feature(enable = "xfintf", enable = "xfintx")] gerenates
+// a stub, and does not inline the intrinsic. Moreover, it sometimes manages to
+// inline code, but the behavior not deterministic, and the behavior changes
+// with every compiler build.
+
 extern "unadjusted" {
     #[link_name = "llvm.riscv.intadd.s"]
     fn _intadd_s(rs1: f64, rs2: f64) -> f64;
