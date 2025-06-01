@@ -1,12 +1,12 @@
 #[cfg(test)]
 use stdarch_test::assert_instr;
 
-// FIXME: Using #[target_feature(enable = "xfintf", enable = "xfintx")] gerenates
+// FIXME: Using #[target_feature(enable = "xfintx")] gerenates
 // a stub, and does not inline the intrinsic. Moreover, it sometimes manages to
 // inline code, but the behavior not deterministic, and the behavior changes
 // with every compiler build.
 
-extern "unadjusted" {
+unsafe extern "unadjusted" {
     #[link_name = "llvm.riscv.intadd.s"]
     fn _intadd_s(rs1: f64, rs2: f64) -> f64;
 
@@ -56,7 +56,7 @@ extern "unadjusted" {
     fn _inteql_s(rs1: f64, rs2: f64) -> i32;
 }
 
-extern "unadjusted" {
+unsafe extern "unadjusted" {
     #[link_name = "llvm.riscv.intadd.h"]
     fn _intadd_h(rs1: f32, rs2: f32) -> f32;
 
@@ -112,7 +112,7 @@ extern "unadjusted" {
 ///
 /// Instruction: **INTADD.S**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xfintf", enable = "xfintx")]
+#[target_feature(enable = "xfintx")]
 #[cfg_attr(test, assert_instr(intadd.s))]
 #[inline]
 pub unsafe fn intadd_s(rs1: f64, rs2: f64) -> f64 {
@@ -125,7 +125,7 @@ pub unsafe fn intadd_s(rs1: f64, rs2: f64) -> f64 {
 ///
 /// Instruction: **INTSUB.S**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xfintf", enable = "xfintx")]
+#[target_feature(enable = "xfintx")]
 #[cfg_attr(test, assert_instr(intsub.s))]
 #[inline]
 pub unsafe fn intsub_s(rs1: f64, rs2: f64) -> f64 {
@@ -138,7 +138,7 @@ pub unsafe fn intsub_s(rs1: f64, rs2: f64) -> f64 {
 ///
 /// Instruction: **INTMUL.S**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xfintf", enable = "xfintx")]
+#[target_feature(enable = "xfintx")]
 #[cfg_attr(test, assert_instr(intmul.s))]
 #[inline]
 pub unsafe fn intmul_s(rs1: f64, rs2: f64) -> f64 {
@@ -152,7 +152,7 @@ pub unsafe fn intmul_s(rs1: f64, rs2: f64) -> f64 {
 ///
 /// Instruction: **INTDIV.S**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xfintf", enable = "xfintx")]
+#[target_feature(enable = "xfintx")]
 #[cfg_attr(test, assert_instr(intdiv.s))]
 #[inline]
 pub unsafe fn intdiv_s(rs1: f64, rs2: f64) -> f64 {
@@ -165,7 +165,7 @@ pub unsafe fn intdiv_s(rs1: f64, rs2: f64) -> f64 {
 ///
 /// Instruction: **INTMID.S**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xfintf", enable = "xfintx")]
+#[target_feature(enable = "xfintx")]
 #[cfg_attr(test, assert_instr(intmid.s))]
 #[inline]
 pub unsafe fn intmid_s(rs1: f64) -> f32 {
@@ -178,7 +178,7 @@ pub unsafe fn intmid_s(rs1: f64) -> f32 {
 ///
 /// Instruction: **INTWDT.S**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xfintf", enable = "xfintx")]
+#[target_feature(enable = "xfintx")]
 #[cfg_attr(test, assert_instr(intwdt.s))]
 #[inline]
 pub unsafe fn intwdt_s(rs1: f64) -> f32 {
@@ -191,7 +191,7 @@ pub unsafe fn intwdt_s(rs1: f64) -> f32 {
 ///
 /// Instruction: **INTRAD.S**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xfintf", enable = "xfintx")]
+#[target_feature(enable = "xfintx")]
 #[cfg_attr(test, assert_instr(intrad.s))]
 #[inline]
 pub unsafe fn intrad_s(rs1: f64) -> f32 {
@@ -202,7 +202,7 @@ pub unsafe fn intrad_s(rs1: f64) -> f32 {
 ///
 /// Instruction: **INTMIN.S**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xfintf", enable = "xfintx")]
+#[target_feature(enable = "xfintx")]
 #[cfg_attr(test, assert_instr(intmin.s))]
 #[inline]
 pub unsafe fn intmin_s(rs1: f64) -> f32 {
@@ -213,7 +213,7 @@ pub unsafe fn intmin_s(rs1: f64) -> f32 {
 ///
 /// Instruction: **INTMAX.S**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xfintf", enable = "xfintx")]
+#[target_feature(enable = "xfintx")]
 #[cfg_attr(test, assert_instr(intmax.s))]
 #[inline]
 pub unsafe fn intmax_s(rs1: f64) -> f32 {
@@ -226,7 +226,7 @@ pub unsafe fn intmax_s(rs1: f64) -> f32 {
 ///
 /// Instruction: **INTBFR.S**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xfintf", enable = "xfintx")]
+#[target_feature(enable = "xfintx")]
 #[cfg_attr(test, assert_instr(intbfr.s))]
 #[inline]
 pub unsafe fn intbfr_s(rs1: f64, rs2: f64) -> i32 {
@@ -239,7 +239,7 @@ pub unsafe fn intbfr_s(rs1: f64, rs2: f64) -> i32 {
 ///
 /// Instruction: **INTMTS.S**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xfintf", enable = "xfintx")]
+#[target_feature(enable = "xfintx")]
 #[cfg_attr(test, assert_instr(intmts.s))]
 #[inline]
 pub unsafe fn intmts_s(rs1: f64, rs2: f64) -> i32 {
@@ -252,7 +252,7 @@ pub unsafe fn intmts_s(rs1: f64, rs2: f64) -> i32 {
 ///
 /// Instruction: **INTOVR.S**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xfintf", enable = "xfintx")]
+#[target_feature(enable = "xfintx")]
 #[cfg_attr(test, assert_instr(intovr.s))]
 #[inline]
 pub unsafe fn intovr_s(rs1: f64, rs2: f64) -> i32 {
@@ -265,7 +265,7 @@ pub unsafe fn intovr_s(rs1: f64, rs2: f64) -> i32 {
 ///
 /// Instruction: **INTDUR.S**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xfintf", enable = "xfintx")]
+#[target_feature(enable = "xfintx")]
 #[cfg_attr(test, assert_instr(intdur.s))]
 #[inline]
 pub unsafe fn intdur_s(rs1: f64, rs2: f64) -> i32 {
@@ -278,7 +278,7 @@ pub unsafe fn intdur_s(rs1: f64, rs2: f64) -> i32 {
 ///
 /// Instruction: **INTSTR.S**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xfintf", enable = "xfintx")]
+#[target_feature(enable = "xfintx")]
 #[cfg_attr(test, assert_instr(intstr.s))]
 #[inline]
 pub unsafe fn intstr_s(rs1: f64, rs2: f64) -> i32 {
@@ -291,7 +291,7 @@ pub unsafe fn intstr_s(rs1: f64, rs2: f64) -> i32 {
 ///
 /// Instruction: **INTFIN.S**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xfintf", enable = "xfintx")]
+#[target_feature(enable = "xfintx")]
 #[cfg_attr(test, assert_instr(intfin.s))]
 #[inline]
 pub unsafe fn intfin_s(rs1: f64, rs2: f64) -> i32 {
@@ -304,7 +304,7 @@ pub unsafe fn intfin_s(rs1: f64, rs2: f64) -> i32 {
 ///
 /// Instruction: **INTEQL.S**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xfintf", enable = "xfintx")]
+#[target_feature(enable = "xfintx")]
 #[cfg_attr(test, assert_instr(inteql.s))]
 #[inline]
 pub unsafe fn inteql_s(rs1: f64, rs2: f64) -> i32 {
@@ -317,7 +317,7 @@ pub unsafe fn inteql_s(rs1: f64, rs2: f64) -> i32 {
 ///
 /// Instruction: **INTADD.H**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xhintf", enable = "xhintx")]
+#[target_feature(enable = "xhintx")]
 #[cfg_attr(test, assert_instr(intadd.h))]
 #[inline]
 pub unsafe fn intadd_h(rs1: f32, rs2: f32) -> f32 {
@@ -330,7 +330,7 @@ pub unsafe fn intadd_h(rs1: f32, rs2: f32) -> f32 {
 ///
 /// Instruction: **INTSUB.H**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xhintf", enable = "xhintx")]
+#[target_feature(enable = "xhintx")]
 #[cfg_attr(test, assert_instr(intsub.h))]
 #[inline]
 pub unsafe fn intsub_h(rs1: f32, rs2: f32) -> f32 {
@@ -343,7 +343,7 @@ pub unsafe fn intsub_h(rs1: f32, rs2: f32) -> f32 {
 ///
 /// Instruction: **INTMUL.H**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xhintf", enable = "xhintx")]
+#[target_feature(enable = "xhintx")]
 #[cfg_attr(test, assert_instr(intmul.h))]
 #[inline]
 pub unsafe fn intmul_h(rs1: f32, rs2: f32) -> f32 {
@@ -357,7 +357,7 @@ pub unsafe fn intmul_h(rs1: f32, rs2: f32) -> f32 {
 ///
 /// Instruction: **INTDIV.H**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xhintf", enable = "xhintx")]
+#[target_feature(enable = "xhintx")]
 #[cfg_attr(test, assert_instr(intdiv.h))]
 #[inline]
 pub unsafe fn intdiv_h(rs1: f32, rs2: f32) -> f32 {
@@ -370,7 +370,7 @@ pub unsafe fn intdiv_h(rs1: f32, rs2: f32) -> f32 {
 ///
 /// Instruction: **INTMID.H**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xhintf", enable = "xhintx")]
+#[target_feature(enable = "xhintx")]
 #[cfg_attr(test, assert_instr(intmid.h))]
 #[inline]
 pub unsafe fn intmid_h(rs1: f32) -> f16 {
@@ -383,7 +383,7 @@ pub unsafe fn intmid_h(rs1: f32) -> f16 {
 ///
 /// Instruction: **INTWDT.H**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xhintf", enable = "xhintx")]
+#[target_feature(enable = "xhintx")]
 #[cfg_attr(test, assert_instr(intwdt.h))]
 #[inline]
 pub unsafe fn intwdt_h(rs1: f32) -> f16 {
@@ -396,7 +396,7 @@ pub unsafe fn intwdt_h(rs1: f32) -> f16 {
 ///
 /// Instruction: **INTRAD.H**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xhintf", enable = "xhintx")]
+#[target_feature(enable = "xhintx")]
 #[cfg_attr(test, assert_instr(intrad.h))]
 #[inline]
 pub unsafe fn intrad_h(rs1: f32) -> f16 {
@@ -407,7 +407,7 @@ pub unsafe fn intrad_h(rs1: f32) -> f16 {
 ///
 /// Instruction: **INTMIN.H**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xhintf", enable = "xhintx")]
+#[target_feature(enable = "xhintx")]
 #[cfg_attr(test, assert_instr(intmin.h))]
 #[inline]
 pub unsafe fn intmin_h(rs1: f32) -> f16 {
@@ -418,7 +418,7 @@ pub unsafe fn intmin_h(rs1: f32) -> f16 {
 ///
 /// Instruction: **INTMAX.H**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xhintf", enable = "xhintx")]
+#[target_feature(enable = "xhintx")]
 #[cfg_attr(test, assert_instr(intmax.h))]
 #[inline]
 pub unsafe fn intmax_h(rs1: f32) -> f16 {
@@ -431,7 +431,7 @@ pub unsafe fn intmax_h(rs1: f32) -> f16 {
 ///
 /// Instruction: **INTBFR.H**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xhintf", enable = "xhintx")]
+#[target_feature(enable = "xhintx")]
 #[cfg_attr(test, assert_instr(intbfr.h))]
 #[inline]
 pub unsafe fn intbfr_h(rs1: f32, rs2: f32) -> i32 {
@@ -444,7 +444,7 @@ pub unsafe fn intbfr_h(rs1: f32, rs2: f32) -> i32 {
 ///
 /// Instruction: **INTMTS.H**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xhintf", enable = "xhintx")]
+#[target_feature(enable = "xhintx")]
 #[cfg_attr(test, assert_instr(intmts.h))]
 #[inline]
 pub unsafe fn intmts_h(rs1: f32, rs2: f32) -> i32 {
@@ -457,7 +457,7 @@ pub unsafe fn intmts_h(rs1: f32, rs2: f32) -> i32 {
 ///
 /// Instruction: **INTOVR.H**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xhintf", enable = "xhintx")]
+#[target_feature(enable = "xhintx")]
 #[cfg_attr(test, assert_instr(intovr.h))]
 #[inline]
 pub unsafe fn intovr_h(rs1: f32, rs2: f32) -> i32 {
@@ -470,7 +470,7 @@ pub unsafe fn intovr_h(rs1: f32, rs2: f32) -> i32 {
 ///
 /// Instruction: **INTDUR.H**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xhintf", enable = "xhintx")]
+#[target_feature(enable = "xhintx")]
 #[cfg_attr(test, assert_instr(intdur.h))]
 #[inline]
 pub unsafe fn intdur_h(rs1: f32, rs2: f32) -> i32 {
@@ -483,7 +483,7 @@ pub unsafe fn intdur_h(rs1: f32, rs2: f32) -> i32 {
 ///
 /// Instruction: **INTSTR.H**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xhintf", enable = "xhintx")]
+#[target_feature(enable = "xhintx")]
 #[cfg_attr(test, assert_instr(intstr.h))]
 #[inline]
 pub unsafe fn intstr_h(rs1: f32, rs2: f32) -> i32 {
@@ -496,7 +496,7 @@ pub unsafe fn intstr_h(rs1: f32, rs2: f32) -> i32 {
 ///
 /// Instruction: **INTFIN.H**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xhintf", enable = "xhintx")]
+#[target_feature(enable = "xhintx")]
 #[cfg_attr(test, assert_instr(intfin.h))]
 #[inline]
 pub unsafe fn intfin_h(rs1: f32, rs2: f32) -> i32 {
@@ -509,7 +509,7 @@ pub unsafe fn intfin_h(rs1: f32, rs2: f32) -> i32 {
 ///
 /// Instruction: **INTEQL.H**
 #[unstable(feature = "riscv_ext_intrinsics", issue = "114544")]
-#[target_feature(enable = "xhintf", enable = "xhintx")]
+#[target_feature(enable = "xhintx")]
 #[cfg_attr(test, assert_instr(inteql.h))]
 #[inline]
 pub unsafe fn inteql_h(rs1: f32, rs2: f32) -> i32 {
